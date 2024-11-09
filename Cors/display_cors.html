@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // fetch("http://localhost:8080/getdata")
+        // .then(response => response.json())
+        // .then(data => console.log(data))
+        // .catch(err => console.log(err));
+
+        fetch("http://localhost:8080/getdata")
+        .then(response => response.json())
+        .then(json => {
+            let li = 
+            `<tr>
+                <th> ID </th>
+                <th> NAME </th>
+                <th> BRANCH </th>
+                <th> MARKS </th>
+            </tr>`   
+            json.forEach(student => {
+                if(student.marks > 60) {
+                    li += `<tr>
+                        <td> ${student.id} </td>
+                        <td> ${student.name} </td>
+                        <td> ${student.branch} </td>
+                        <td> ${student.marks} </td>
+                      </tr>`
+                }
+                
+            });
+            document.getElementById("corsData").innerHTML = li;
+        });
+    </script>
+</head>
+<body>
+    <h1>
+        WELCOME TO CORS!!!!
+    </h1>
+    <table id = "corsData" border = "1">
+
+    </table>
+    
+</body>
+</html>
