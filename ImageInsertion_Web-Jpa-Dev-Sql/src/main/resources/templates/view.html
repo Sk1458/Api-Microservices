@@ -1,0 +1,93 @@
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Image from Spring Boot</title>
+</head>
+<body>
+    <h1>Display Image from Spring Boot Project</h1>
+    <img id="image-display" alt="Image will be shown here">
+
+    <script>
+        const imageId = 2; 
+        const imageUrl = `/getimage/${imageId}`;
+
+        fetch(imageUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Image not found');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const imgElement = document.getElementById('image-display');
+                imgElement.src = URL.createObjectURL(blob);
+            })
+            .catch(err => {
+                console.error('Error fetching image:', err);
+                document.getElementById('image-display').alt = 'Error loading image';
+            });
+    </script>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Fetcher</title>
+</head>
+<body>
+    <h1>Enter Image ID</h1>
+
+    
+    <form id="imageForm">
+        <label for="imageId">Image ID: </label>
+        <input type="number" id="imageId" required>
+        <button type="submit">Get Image</button>
+    </form>
+
+    
+    <div id="imageContainer">
+        <img id="image-display" alt="Image will be shown here" style="max-width: 100%; margin-top: 20px;">
+    </div>
+
+    <script>
+        
+        document.getElementById('imageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            
+            const imageId = document.getElementById('imageId').value;
+
+            
+            const imageUrl = `/testing/getimage/${imageId}`;
+
+            
+            fetch(imageUrl)
+                .then(response => {
+                    
+                    if (!response.ok) {
+                        throw new Error('Image not found');
+                    }
+                    
+                    return response.blob();
+                })
+                .then(blob => {
+                    
+                    const imgElement = document.getElementById('image-display');
+                    
+                    imgElement.src = URL.createObjectURL(blob);
+                })
+                .catch(err => {
+                    
+                    console.error('Error fetching image:', err);
+                    document.getElementById('image-display').alt = 'Error loading image';
+                });
+        });
+    </script>
+</body>
+</html>
